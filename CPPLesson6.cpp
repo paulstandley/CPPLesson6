@@ -9,37 +9,28 @@
 #include <cstring> // For std::strlen
 
 
-void string_data()
+void incomplete_implementation()
 {
-    std::string_view str1{ "jimbob" };
-    std::cout << str1 << '\n';
-    // We use std::strlen because it's simple, this could be any other function
-    // that needs a null-terminated string.
-    // It's okay to use data() because we haven't modified the view, and the
-    // string is null-terminated.
-    std::cout << std::strlen(str1.data()) << '\n';
-
-    std::string_view str2{ "balloon" };
-    // Remove the "b"
-    str2.remove_prefix(1);
-    // remove the "oon"
-    str2.remove_suffix(3);
-    // Remember that the above doesn't modify the string, it only changes
-    // the region that str is observing.
-    std::cout << str2 << " has " << std::strlen(str2.data()) << " letter(s)\n";
-    std::cout << "str.data() is " << str2.data() << '\n';
-    std::cout << "str is " << str2 << '\n';
-    /*
-    Only use std::string_view::data() if the std::string_view‘s view hasn’t been modified and
-    the string being viewed is null-terminated. 
-    Using std::string_view::data() of a non-null-terminated string can cause undefined behavior.
-    */
+    std::string s{ "hello" };
+    std::string_view v{ "world" };
+    // Doesn't work
+    //std::cout << (s + v) << '\n';
+    //std::cout << (v + s) << '\n';
+    // Potentially unsafe, or not what we want, because we're treating
+    // the std::string_view as a C-style string.
+    std::cout << (s + v.data()) << '\n';
+    std::cout << (v.data() + s) << '\n';
+    // Ok, but ugly and wasteful because we have to construct a new std::string.
+    std::cout << (s + std::string{ v }) << '\n';
+    std::cout << (std::string{ v } +s) << '\n';
+    std::cout << (s + static_cast<std::string>(v)) << '\n';
+    std::cout << (static_cast<std::string>(v) + s) << '\n';
 }
 
 
 int main()
 {
-    string_data();
+    incomplete_implementation();
 
     return 0;
 }

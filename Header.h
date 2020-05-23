@@ -9,6 +9,8 @@ void print_implicitly_convert_string_view(std::string s);
 void implicitly_convert_string_view();
 
 void converting_string_view_c_style_string();
+void string_data();
+void incomplete_implementation();
 
 
 #endif // !CPPLESSON_6
