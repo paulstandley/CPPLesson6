@@ -3,6 +3,8 @@
 #include "Header.h"
 #include <string>
 #include <string_view>
+#include <cstring> // For std::strlen
+
 
 void string_view_hello()
 {
@@ -66,5 +68,32 @@ void ownership_issues()
     std::cout << "Your name is " << view << '\n'; // Undefined behavior
     // Make sure that the underlying string viewed with a std::string_view 
     // does not go out of scope and isn’t modified while using the std::string_view.
+}
+
+void print_implicitly_convert_string_view(std::string s)
+{
+    std::cout << s << '\n';
+}
+
+void implicitly_convert_string_view()
+{
+    std::string_view sv{ "balloon" };
+    sv.remove_suffix(3);
+    // print(sv); // compile error: won't implicitly convert
+    std::string str{ sv }; // explicit conversion
+    print_implicitly_convert_string_view(str); // okay
+    print_implicitly_convert_string_view(static_cast<std::string>(sv)); // okay
+}
+
+void converting_string_view_c_style_string()
+{
+    std::string_view sv{ "balloon" };
+    sv.remove_suffix(3);
+    // Create a std::string from the std::string_view
+    std::string str{ sv };
+    // Get the null-terminated C-style string.
+    auto szNullTerminated{ str.c_str() };
+    // Pass the null-terminated string to the function that we want to use.
+    std::cout << str << " has " << std::strlen(szNullTerminated) << " letter(s)\n";
 }
 

@@ -6,26 +6,40 @@
 #include "Header.h"
 #include <string>
 #include <string_view>
+#include <cstring> // For std::strlen
 
 
-void print_implicitly_convert_string_view(std::string s)
+void string_data()
 {
-    std::cout << s << '\n';
+    std::string_view str1{ "jimbob" };
+    std::cout << str1 << '\n';
+    // We use std::strlen because it's simple, this could be any other function
+    // that needs a null-terminated string.
+    // It's okay to use data() because we haven't modified the view, and the
+    // string is null-terminated.
+    std::cout << std::strlen(str1.data()) << '\n';
+
+    std::string_view str2{ "balloon" };
+    // Remove the "b"
+    str2.remove_prefix(1);
+    // remove the "oon"
+    str2.remove_suffix(3);
+    // Remember that the above doesn't modify the string, it only changes
+    // the region that str is observing.
+    std::cout << str2 << " has " << std::strlen(str2.data()) << " letter(s)\n";
+    std::cout << "str.data() is " << str2.data() << '\n';
+    std::cout << "str is " << str2 << '\n';
+    /*
+    Only use std::string_view::data() if the std::string_view‘s view hasn’t been modified and
+    the string being viewed is null-terminated. 
+    Using std::string_view::data() of a non-null-terminated string can cause undefined behavior.
+    */
 }
 
-void implicitly_convert_string_view()
-{
-    std::string_view sv{ "balloon" };
-    sv.remove_suffix(3);
-    // print(sv); // compile error: won't implicitly convert
-    std::string str{ sv }; // explicit conversion
-    print_implicitly_convert_string_view(str); // okay
-    print_implicitly_convert_string_view(static_cast<std::string>(sv)); // okay
-}
 
 int main()
 {
-    implicitly_convert_string_view();
+    string_data();
 
     return 0;
 }
