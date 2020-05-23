@@ -7,32 +7,25 @@
 #include <string>
 #include <string_view>
 
-std::string_view ask_for_name()
-{
-    std::cout << "What's your name?\n";
-    // Use a std::string, because std::cin needs to modify it.
-    std::string str{};
-    std::cin >> str;
-    // We're switching to std::string_view for demonstrative purposes only.
-    // If you already have a std::string, there's no reason to switch to
-    // a std::string_view.
-    std::string_view view{ str };
-    std::cout << "Hello " << view << '\n';
-    return view;
-} // str dies, and so does the string that str created.
 
-void ownership_issues()
+void print_implicitly_convert_string_view(std::string s)
 {
-    std::string_view view{ ask_for_name() };
-    // view is observing a string that already died.
-    std::cout << "Your name is " << view << '\n'; // Undefined behavior
-    // Make sure that the underlying string viewed with a std::string_view 
-    // does not go out of scope and isn’t modified while using the std::string_view.
+    std::cout << s << '\n';
+}
+
+void implicitly_convert_string_view()
+{
+    std::string_view sv{ "balloon" };
+    sv.remove_suffix(3);
+    // print(sv); // compile error: won't implicitly convert
+    std::string str{ sv }; // explicit conversion
+    print_implicitly_convert_string_view(str); // okay
+    print_implicitly_convert_string_view(static_cast<std::string>(sv)); // okay
 }
 
 int main()
 {
-    ownership_issues();
+    implicitly_convert_string_view();
 
     return 0;
 }
