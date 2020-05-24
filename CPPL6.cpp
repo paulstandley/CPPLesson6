@@ -4,6 +4,8 @@
 #include <string>
 #include <string_view>
 #include <cstring> // For std::strlen
+#include <cstddef> // for NULL
+
 
 
 void string_view_hello()
@@ -217,6 +219,28 @@ void crash() {
     int* p; // Create an uninitialized pointer (that points to garbage)
     bang(p); // Trick compiler into thinking we're going to assign this a valid value
     std::cout << *p << '\n'; // Dereference the garbage pointer
+}
+
+void size_of_pointer()
+{
+    char* chPtr{}; // chars are 1 byte
+    int* iPtr{}; // ints are usually 4 bytes
+    struct Something
+    {
+        int x{};
+        int y{};
+        int z{};
+    };
+    Something* somethingPtr{}; // Something is probably 12 bytes
+    std::cout << sizeof(chPtr) << '\n'; // prints 4
+    std::cout << sizeof(iPtr) << '\n'; // prints 4
+    std::cout << sizeof(somethingPtr) << '\n'; // prints 4
+    /*
+    Pointers are variables that hold a memory address.
+    They can be dereferenced using the dereference operator (*)
+    to retrieve the value at the address they are holding.
+    Dereferencing a garbage pointer may crash your application.
+    */
 }
 
 

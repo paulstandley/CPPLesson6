@@ -7,34 +7,58 @@
 #include <string>
 #include <string_view>
 #include <cstring> // For std::strlen
+#include <cstddef> // for NULL std::nullptr_t
 
 
-void size_of_pointer()
+
+void null_pointers()
 {
-    char *chPtr{}; // chars are 1 byte
-    int *iPtr{}; // ints are usually 4 bytes
-    struct Something
-    {
-        int x{};
-        int y{};
-        int z{};
-    };
-    Something *somethingPtr{}; // Something is probably 12 bytes
-    std::cout << sizeof(chPtr) << '\n'; // prints 4
-    std::cout << sizeof(iPtr) << '\n'; // prints 4
-    std::cout << sizeof(somethingPtr) << '\n'; // prints 4
-    /*
-    Pointers are variables that hold a memory address. 
-    They can be dereferenced using the dereference operator (*) 
-    to retrieve the value at the address they are holding. 
-    Dereferencing a garbage pointer may crash your application.
-    */
+    float *ptr1{ 0 };  // ptr is now a null pointer
+    float *ptr2; // ptr2 is uninitialized
+    ptr2 = 0; // ptr2 is now a null pointer
+    double *ptr3{ 0 };
+    // pointers convert to boolean false if they are null, and boolean true if they are non-null
+    if (ptr3)
+        std::cout << "ptr is pointing to a double value.";
+    else
+        std::cout << "ptr is a null pointer.";
+    double *ptr4{ NULL }; // ptr is a null pointer
+    int *ptr5{ nullptr }; 
+    // note: ptr is still an integer pointer, just set to a null value
+}
+
+void print(int x)
+{
+    std::cout << "print(int): " << x << '\n';
+}
+
+void print(int *x)
+{
+    if (!x)
+        std::cout << "print(int*): null\n";
+    else
+        std::cout << "print(int*): " << *x << '\n';
+}
+void call_print()
+{
+    int *x1{ NULL };
+    print(x1); // calls print(int*) because x has type int*
+    print(0); // calls print(int) because 0 is an integer literal
+    print(NULL); // likely calls print(int), although we probably wanted print(int*)
+    int *x2{ nullptr };
+    print(x2); // calls print(int*)
+    print(nullptr); // calls print(int*) as desired
+}
+
+void doSomething(std::nullptr_t ptr)
+{
+    std::cout << "in doSomething()\n";
 }
 
 
 int main()
 {
-    size_of_pointer();
+    doSomething(nullptr); // call doSomething with an argument of type std::nullptr_t
 
     return 0;
 }

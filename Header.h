@@ -17,6 +17,7 @@ void reassign_pointer();
 
 void bang(int*&);
 void crash();
+void size_of_pointer();
 
 
 
