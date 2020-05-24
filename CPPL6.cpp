@@ -142,4 +142,50 @@ void incomplete_implementation()
     std::cout << (static_cast<std::string>(v) + s) << '\n';
 }
 
+void ponter_address_operator()
+{
+    int memory_address{ 5 };
+    std::cout << memory_address << '\n'; // print the value of variable 
+    std::cout << &memory_address << '\n'; // print the memory address of variable 
+    // The dereference operator (*) allows us to access the value at a particular address:
+    int x{ 5 };
+    std::cout << x << '\n'; // print the value of variable x
+    std::cout << &x << '\n'; // print the memory address of variable x
+    std::cout << *(&x) << '\n'; /// print the value at the memory address of variable x
+                                // (parenthesis not required, but make it easier to read)
+    /*
+    Pointer variables are declared just like normal variables,
+    only with an asterisk between the data type and the variable name.
+    Note that this asterisk is not a dereference.
+    It is part of the pointer declaration syntax.
+    */
+
+    int* iPtr_int{}; // a pointer to an integer value
+    double* dPtr_double{}; // a pointer to a double value
+    int* iPtr2{}; // also valid syntax (acceptable, but not favored)
+    int* iPtr3{}; // also valid syntax (but don't do this, it looks like multiplication)
+    int* iPtr4{}, * iPtr5{}; // declare two pointers to integer variables (not recommended)
+    //int* do_somthing();This makes it clear that the function is returning a value of type int* and not an int
+    // When declaring a pointer variable, put the asterisk next to the variable name
+    // When declaring a function, put the asterisk of a pointer return value next to the type
+    int v{ 5 };
+    int* ptr{ &v }; // initialize ptr with address of variable v
+    std::cout << &v << '\n'; // print the address of variable v
+    std::cout << ptr << '\n'; // print the address that ptr is holding
+
+    int iValue{ 5 };
+    double dValue{ 7.0 };
+
+    int* iPtr{ &iValue }; // ok
+    double* dPtr{ &dValue }; // ok
+    //iPtr = &dValue; 
+    // wrong -- int pointer cannot point to the address of a double variable
+    //dPtr = &iValue; 
+    // wrong -- double pointer cannot point to the address of an int variable
+    //int *ptr{ 5 }; // wrong pointers can only hold addresses
+    //double *dPtr{ 0x0012FF7C };// not ok
+    //C++ will also not allow you to directly convert literal memory addresses to a pointer
+}
+
+
 

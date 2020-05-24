@@ -12,6 +12,9 @@ void converting_string_view_c_style_string();
 void string_data();
 void incomplete_implementation();
 
+void ponter_address_operator();
+void reassign_pointer();
+
 
 #endif // !CPPLESSON_6
 
