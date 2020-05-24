@@ -206,5 +206,19 @@ void reassign_pointer()
     std::cout << value3 << '\n'; // prints 15
 }
 
+void bang(int*&) // We cover & later. Don't worry about it for now, we're only using it to trick the compiler into thinking that p has a value.
+{
+    // p is a reference to a pointer.  We'll cover references (and references to pointers) later in this chapter.
+    // We're using this to trick the compiler into thinking p could be modified, so it won't complain about p being uninitialized.
+    // This isn't something you'll ever want to do intentionally.
+}
+
+void crash() {
+    int* p; // Create an uninitialized pointer (that points to garbage)
+    bang(p); // Trick compiler into thinking we're going to assign this a valid value
+    std::cout << *p << '\n'; // Dereference the garbage pointer
+}
+
+
 
 

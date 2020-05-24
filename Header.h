@@ -15,6 +15,10 @@ void incomplete_implementation();
 void ponter_address_operator();
 void reassign_pointer();
 
+void bang(int*&);
+void crash();
+
+
 
 #endif // !CPPLESSON_6
 
