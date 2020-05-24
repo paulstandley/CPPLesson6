@@ -18,7 +18,12 @@ void reassign_pointer();
 void bang(int*&);
 void crash();
 void size_of_pointer();
+void null_pointers();
 
+void print(int x);
+void print(int *x);
+void call_print();
+void doSomething(std::nullptr_t ptr);
 
 
 #endif // !CPPLESSON_6

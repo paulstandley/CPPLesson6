@@ -10,55 +10,20 @@
 #include <cstddef> // for NULL std::nullptr_t
 
 
-
-void null_pointers()
+void array_decay_to_address()
 {
-    float *ptr1{ 0 };  // ptr is now a null pointer
-    float *ptr2; // ptr2 is uninitialized
-    ptr2 = 0; // ptr2 is now a null pointer
-    double *ptr3{ 0 };
-    // pointers convert to boolean false if they are null, and boolean true if they are non-null
-    if (ptr3)
-        std::cout << "ptr is pointing to a double value.";
-    else
-        std::cout << "ptr is a null pointer.";
-    double *ptr4{ NULL }; // ptr is a null pointer
-    int *ptr5{ nullptr }; 
-    // note: ptr is still an integer pointer, just set to a null value
+    int array[5]{ 9, 7, 5, 3, 1 };
+    // print address of the array's first element
+    std::cout << "Element 0 has address: " << &array[0] << '\n';
+    // print the value of the pointer the array decays to
+    std::cout << "The array decays to a pointer holding address: " << array << '\n';
 }
 
-void print(int x)
-{
-    std::cout << "print(int): " << x << '\n';
-}
-
-void print(int *x)
-{
-    if (!x)
-        std::cout << "print(int*): null\n";
-    else
-        std::cout << "print(int*): " << *x << '\n';
-}
-void call_print()
-{
-    int *x1{ NULL };
-    print(x1); // calls print(int*) because x has type int*
-    print(0); // calls print(int) because 0 is an integer literal
-    print(NULL); // likely calls print(int), although we probably wanted print(int*)
-    int *x2{ nullptr };
-    print(x2); // calls print(int*)
-    print(nullptr); // calls print(int*) as desired
-}
-
-void doSomething(std::nullptr_t ptr)
-{
-    std::cout << "in doSomething()\n";
-}
 
 
 int main()
 {
-    doSomething(nullptr); // call doSomething with an argument of type std::nullptr_t
+    array_decay_to_address();
 
     return 0;
 }
