@@ -187,5 +187,24 @@ void ponter_address_operator()
     //C++ will also not allow you to directly convert literal memory addresses to a pointer
 }
 
+void reassign_pointer()
+{
+    int value1{ 5 };
+    int value2{ 7 };
+    int* ptr1{};
+    ptr1 = &value1; // ponits to value1
+    std::cout << "pointer to value 1 " << *ptr1 << '\n';// prints 5
+    std::cout << "pointer address 1 " << ptr1 << '\n';// address
+    std::cout << "reassign pointer\n";
+    ptr1 = &value2;// points to value2
+    std::cout << "pointer to value 1 " << *ptr1 << '\n';// prints 7
+    std::cout << "pointer address 1 " << ptr1 << '\n';// address
+
+    int value3{ 5 };
+    int* ptr2{ &value3 }; // ptr2 points to value3
+    *ptr2 = 15; // *ptr2 is the same as value3, which is assigned 15
+    std::cout << value3 << '\n'; // prints 15
+}
+
 
 

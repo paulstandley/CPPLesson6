@@ -9,30 +9,23 @@
 #include <cstring> // For std::strlen
 
 
-void reassign_pointer()
+void bang(int *&) // We cover & later. Don't worry about it for now, we're only using it to trick the compiler into thinking that p has a value.
 {
-    int value1{ 5 };
-    int value2{ 7 };
-    int *ptr1{};
-    ptr1 = &value1; // ponits to value1
-    std::cout << "pointer to value 1 " << *ptr1 << '\n';// prints 5
-    std::cout << "pointer address 1 " << ptr1 << '\n';// address
-    std::cout << "reassign pointer\n";
-    ptr1 = &value2;// points to value2
-    std::cout << "pointer to value 1 " << *ptr1 << '\n';// prints 7
-    std::cout << "pointer address 1 " << ptr1 << '\n';// address
+    // p is a reference to a pointer.  We'll cover references (and references to pointers) later in this chapter.
+    // We're using this to trick the compiler into thinking p could be modified, so it won't complain about p being uninitialized.
+    // This isn't something you'll ever want to do intentionally.
+}
 
-    int value3{ 5 };
-    int *ptr2{ &value3 }; // ptr2 points to value3
-    *ptr2 = 15; // *ptr2 is the same as value3, which is assigned 15
-    std::cout << value3 << '\n'; // prints 15
-
+void crash() {
+    int *p; // Create an uninitialized pointer (that points to garbage)
+    bang(p); // Trick compiler into thinking we're going to assign this a valid value
+    std::cout << *p << '\n'; // Dereference the garbage pointer
 }
 
 
 int main()
 {
-    reassign_pointer();
+    crash();
 
     return 0;
 }
