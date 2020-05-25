@@ -27,6 +27,10 @@ void doSomething(std::nullptr_t ptr);
 
 void array_decay_to_address();
 void dereference_array_to_get_value_of_first_element();
+void print_size_of1(int* array);
+void print_size_of2(int array[]);
+void passing_fixed_arrays_to_functions();
+
 
 
 #endif // !CPPLESSON_6

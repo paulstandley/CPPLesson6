@@ -9,33 +9,27 @@
 #include <cstring> // For std::strlen
 #include <cstddef> // for NULL std::nullptr_t
 
-void print_size_of1(int *array)
+
+// parameter ptr contains a copy of the array's address
+void change_array(int *ptr)
 {
-    // array is treated as a pointer here
-    std::cout << sizeof(array) << '\n';
-    // prints the size of a pointer, not the size of the array!
+    *ptr = 5; // so changing an array element changes the _actual_ array
 }
 
-// C++ will implicitly convert parameter array[] to *array
-void print_size_of2(int array[])
-{
-    // array is treated as a pointer here, not a fixed array
-    std::cout << sizeof(array) << '\n'; 
-    // prints the size of a pointer, not the size of the array!
-}
-
-void passing_fixed_arrays_to_functions()
+void print_change_array()
 {
     int array[]{ 1, 1, 2, 3, 5, 8, 13, 21 };
-    std::cout << sizeof(array) << '\n'; // will print sizeof(int) * array length
-    print_size_of1(array); // the array argument decays into a pointer here
-    print_size_of2(array); // the array argument decays into a pointer here
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    change_array(array);
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    // Arrays in structs and classes don’t decay
 }
 
 
 int main()
 {
-    passing_fixed_arrays_to_functions();
+    print_change_array();
+
 
     return 0;
 }

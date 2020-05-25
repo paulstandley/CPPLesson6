@@ -337,5 +337,28 @@ void dereference_array_to_get_value_of_first_element()
     */
 }
 
+void print_size_of1(int* array)
+{
+    // array is treated as a pointer here
+    std::cout << sizeof(array) << '\n';
+    // prints the size of a pointer, not the size of the array!
+}
+
+// C++ will implicitly convert parameter array[] to *array
+void print_size_of2(int array[])
+{
+    // array is treated as a pointer here, not a fixed array
+    std::cout << sizeof(array) << '\n';
+    // prints the size of a pointer, not the size of the array!
+}
+
+void passing_fixed_arrays_to_functions()
+{
+    int array[]{ 1, 1, 2, 3, 5, 8, 13, 21 };
+    std::cout << sizeof(array) << '\n'; // will print sizeof(int) * array length
+    print_size_of1(array); // the array argument decays into a pointer here
+    print_size_of2(array); // the array argument decays into a pointer here
+}
+
 
 
