@@ -10,25 +10,36 @@
 #include <cstddef> // for NULL std::nullptr_t
 
 
-// parameter ptr contains a copy of the array's address
-void change_array(int *ptr)
+void pointer_arithmetic()
 {
-    *ptr = 5; // so changing an array element changes the _actual_ array
-}
+    int value1{ 7 };
+    int *ptr1{ &value1 };
 
-void print_change_array()
-{
-    int array[]{ 1, 1, 2, 3, 5, 8, 13, 21 };
-    std::cout << "Element 0 has value: " << array[0] << '\n';
-    change_array(array);
-    std::cout << "Element 0 has value: " << array[0] << '\n';
-    // Arrays in structs and classes don’t decay
+    std::cout << ptr1 << '\n';
+    std::cout << ptr1 + 1 << '\n';
+    std::cout << ptr1 + 2 << '\n';
+    std::cout << ptr1 + 3 << '\n';
+
+    short value2{ 7 };
+    short *ptr2{ &value2 };
+
+    std::cout << ptr2 << '\n';
+    std::cout << ptr2 + 1 << '\n';
+    std::cout << ptr2 + 2 << '\n';
+    std::cout << ptr2 + 3 << '\n';
+
+    int array1[]{ 9, 7, 5, 3, 1 };
+
+    std::cout << "Element 0 is at address: " << &array1[0] << '\n';
+    std::cout << "Element 1 is at address: " << &array1[1] << '\n';
+    std::cout << "Element 2 is at address: " << &array1[2] << '\n';
+    std::cout << "Element 3 is at address: " << &array1[3] << '\n';
 }
 
 
 int main()
 {
-    print_change_array();
+    pointer_arithmetic();
 
 
     return 0;

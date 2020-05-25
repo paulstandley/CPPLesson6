@@ -360,5 +360,21 @@ void passing_fixed_arrays_to_functions()
     print_size_of2(array); // the array argument decays into a pointer here
 }
 
+// parameter ptr contains a copy of the array's address
+void change_array(int* ptr)
+{
+    *ptr = 5; // so changing an array element changes the _actual_ array
+}
+
+void print_change_array()
+{
+    int array[]{ 1, 1, 2, 3, 5, 8, 13, 21 };
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    change_array(array);
+    std::cout << "Element 0 has value: " << array[0] << '\n';
+    // Arrays in structs and classes don’t decay
+}
+
+
 
 

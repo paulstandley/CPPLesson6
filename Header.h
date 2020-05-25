@@ -31,6 +31,8 @@ void print_size_of1(int* array);
 void print_size_of2(int array[]);
 void passing_fixed_arrays_to_functions();
 
+void change_array(int* ptr);
+void print_change_array();
 
 
 #endif // !CPPLESSON_6
