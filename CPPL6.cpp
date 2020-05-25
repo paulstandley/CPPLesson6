@@ -5,6 +5,8 @@
 #include <string_view>
 #include <cstring> // For std::strlen
 #include <cstddef> // for NULL
+#include <iterator> // for std::size std::begin and std::end
+#include <algorithm>
 
 
 
@@ -373,6 +375,32 @@ void print_change_array()
     change_array(array);
     std::cout << "Element 0 has value: " << array[0] << '\n';
     // Arrays in structs and classes don’t decay
+}
+
+void pointer_arithmetic()
+{
+    int value1{ 7 };
+    int* ptr1{ &value1 };
+    std::cout << ptr1 << '\n';
+    std::cout << ptr1 + 1 << '\n';
+    std::cout << ptr1 + 2 << '\n';
+    std::cout << ptr1 + 3 << '\n';
+    short value2{ 7 };
+    short* ptr2{ &value2 };
+    std::cout << ptr2 << '\n';
+    std::cout << ptr2 + 1 << '\n';
+    std::cout << ptr2 + 2 << '\n';
+    std::cout << ptr2 + 3 << '\n';
+    int array1[]{ 9, 7, 5, 3, 1 };
+    std::cout << "Element 0 is at address: " << &array1[0] << '\n';
+    std::cout << "Element 1 is at address: " << &array1[1] << '\n';
+    std::cout << "Element 2 is at address: " << &array1[2] << '\n';
+    std::cout << "Element 3 is at address: " << &array1[3] << '\n';
+    int array[]{ 9, 7, 5, 3, 1 };
+    std::cout << &array[1] << '\n'; // print memory address of array element 1
+    std::cout << array + 1 << '\n'; // print memory address of array pointer + 1 
+    std::cout << array[1] << '\n'; // prints 7
+    std::cout << *(array + 1) << '\n'; // prints 7 (note the parenthesis required here)
 }
 
 

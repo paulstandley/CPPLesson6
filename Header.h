@@ -34,6 +34,9 @@ void passing_fixed_arrays_to_functions();
 void change_array(int* ptr);
 void print_change_array();
 
+void pointer_arithmetic();
+
+
 
 #endif // !CPPLESSON_6
 

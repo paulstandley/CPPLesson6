@@ -8,38 +8,105 @@
 #include <string_view>
 #include <cstring> // For std::strlen
 #include <cstddef> // for NULL std::nullptr_t
+#include <iterator> // for std::size std::begin and std::end
+#include <algorithm>
 
 
-void pointer_arithmetic()
+bool isVowel(char ch)
 {
-    int value1{ 7 };
-    int *ptr1{ &value1 };
+    switch (ch)
+    {
+    case 'A':
+    case 'a':
+    case 'E':
+    case 'e':
+    case 'I':
+    case 'i':
+    case 'O':
+    case 'o':
+    case 'U':
+    case 'u':
+        return true;
+    default:
+        return false;
+    }
+}
 
-    std::cout << ptr1 << '\n';
-    std::cout << ptr1 + 1 << '\n';
-    std::cout << ptr1 + 2 << '\n';
-    std::cout << ptr1 + 3 << '\n';
+void pointer_iterate_array()
+{
+    char name1[]{ "Louise" };
+    int arrayLength{ static_cast<int>(std::size(name1)) };
+    int numVowels{ 0 };
+    for (char *ptr1{ name1 }; ptr1 < (name1 + arrayLength); ++ptr1)
+    {
+        if (isVowel(*ptr1))
+        {
+            ++numVowels;
+        }
+    }
+    std::cout << name1 << " has " << numVowels << " vowels.\n";
+    numVowels =  0;
+    char name2[]{ "Dollie" };
+    auto numVowels{ std::count_if(std::begin(name2), std::end(name2), isVowel) };
+    std::cout << name2 << " has " << numVowels << " vowels.\n";
 
-    short value2{ 7 };
-    short *ptr2{ &value2 };
+    /*
+    int arr[]{ 1, 2, 3 };
+    std::cout << 2[arr] << '\n';
+    arr[2]
+    // same as
+    *(arr + 2)
+    // same as
+    *(2 + arr)
+    // same as
+    2[arr]
 
-    std::cout << ptr2 << '\n';
-    std::cout << ptr2 + 1 << '\n';
-    std::cout << ptr2 + 2 << '\n';
-    std::cout << ptr2 + 3 << '\n';
+#include <iostream>
+#include <iterator>
 
-    int array1[]{ 9, 7, 5, 3, 1 };
+int* find(int* begin, int* end, int value)
+{
+    for (int* p{ begin }; p != end; ++p)
+    {
+        if (*p == value)
+        {
+            return p;
+        }
+    }
 
-    std::cout << "Element 0 is at address: " << &array1[0] << '\n';
-    std::cout << "Element 1 is at address: " << &array1[1] << '\n';
-    std::cout << "Element 2 is at address: " << &array1[2] << '\n';
-    std::cout << "Element 3 is at address: " << &array1[3] << '\n';
+    return end;
+}
+
+int main()
+{
+    int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
+
+    int* found{ find(std::begin(arr), std::end(arr), 20) };
+
+    if (found != std::end(arr))
+    {
+        std::cout << *found << '\n';
+    }
+
+    return 0;
+}
+    */
+    int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
+
+    // Note: std::find returns an iterator.
+    auto found{ std::find(std::begin(arr), std::end(arr), 20) };
+
+    if (found != std::end(arr))
+    {
+        std::cout << *found << '\n';
+    }
+
 }
 
 
 int main()
 {
-    pointer_arithmetic();
+    
 
 
     return 0;
