@@ -25,6 +25,9 @@ void print(int *x);
 void call_print();
 void doSomething(std::nullptr_t ptr);
 
+void array_decay_to_address();
+void dereference_array_to_get_value_of_first_element();
+
 
 #endif // !CPPLESSON_6
 

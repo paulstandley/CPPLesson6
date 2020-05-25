@@ -287,5 +287,55 @@ void doSomething(std::nullptr_t ptr)
     std::cout << "in doSomething()\n";
 }
 
+void array_decay_to_address()
+{
+    int array[5]{ 9, 7, 5, 3, 1 };
+    // print address of the array's first element
+    std::cout << "Element 0 has address: " << &array[0] << '\n';
+    // print the value of the pointer the array decays to
+    std::cout << "The array decays to a pointer holding address: " << array << '\n';
+}
+
+void dereference_array_to_get_value_of_first_element()
+{
+    int array0[5]{ 9, 7, 5, 3, 1 };
+    // dereferencing an array returns the first element (element 0)
+    std::cout << "Dereferencing an array returns the first element " << *array0 << '\n'; // will print 9!
+    char name[]{ "Paul" }; // C-style string (also an array)
+    std::cout << "Char array first element dereference " << *name << '\n'; // will print 'P'
+    /*
+    Note that we’re not actually dereferencing the array itself.
+    The array (of type int[5]) gets implicitly converted into a pointer (of type int *),
+    and we dereference the pointer to get the value at the memory address the pointer
+    is holding (the value of the first element of the array).
+    */
+    int array1[5]{ 9, 7, 5, 3, 1 };
+    std::cout << "Dereferencing an array returns the first element " << *array1 << '\n'; // will print 9
+    int* ptr1{ array1 };
+    std::cout << "Array1 decays into a pointer of type int * and our pointer(also of type int*) " << *ptr1 << '\n'; // will print 9
+    /*
+    This works because the array1 decays into a pointer of type int *,
+    and our pointer (also of type int *) has the same type
+    */
+    int array2[5]{ 9, 7, 5, 3, 1 };
+    std::cout << "Sizeof(int) * array length " << sizeof(array2) << '\n'; // will print sizeof(int) * array length
+    int* ptr2{ array2 };
+    std::cout << "Size of a pointer " << sizeof(ptr2) << '\n'; // will print the size of a pointer
+    /*
+    The primary difference occurs when using the sizeof() operator.
+    When used on a fixed array, sizeof returns the size of the entire
+    array (array length * element size).
+    When used on a pointer, sizeof returns the size of a memory address (in bytes)
+    A fixed array knows how long the array it is pointing to is. A pointer to the array does not
+
+    The second difference occurs when using the address-of operator (&).
+    Taking the address of a pointer yields the memory address of the pointer variable.
+    Taking the address of the array returns a pointer to the entire array.
+    This pointer also points to the first element of the array, but the type information is different
+    (in the above example, the type of &array is int(*)[5]).
+    It’s unlikely you’ll ever need to use this.
+    */
+}
+
 
 
