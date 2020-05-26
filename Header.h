@@ -41,6 +41,10 @@ void pointer_iterate_array();
 void pointer_to_symbolic_constant();
 const char* get_pointer_to_array();
 
+void dynamic_memory_allocation();
+void dangling_pointer();
+
+
 
 #endif // !CPPLESSON_6
 
