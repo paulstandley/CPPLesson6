@@ -35,7 +35,11 @@ void change_array(int* ptr);
 void print_change_array();
 
 void pointer_arithmetic();
+bool isVowel(char ch);
+void pointer_iterate_array();
 
+void pointer_to_symbolic_constant();
+const char* get_pointer_to_array();
 
 
 #endif // !CPPLESSON_6

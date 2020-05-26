@@ -12,101 +12,35 @@
 #include <algorithm>
 
 
-bool isVowel(char ch)
+void pointer_to_symbolic_constant()
 {
-    switch (ch)
-    {
-    case 'A':
-    case 'a':
-    case 'E':
-    case 'e':
-    case 'I':
-    case 'i':
-    case 'O':
-    case 'o':
-    case 'U':
-    case 'u':
-        return true;
-    default:
-        return false;
-    }
+    const char *my_name1{ "Kerrin" }; // pointer to symbolic constant
+    std::cout << my_name1 << '\n';
+    const char *my_name_2{ "Louise" };
+    const char *my_name_3{ "Louise" };
+    std::cout << &my_name_2 << '\t' <<  &my_name_3 << '\n';
+    std::cout << get_pointer_to_array() << '\n';
+    char c{ 'Q' };
+    std::cout << &c << '\n';
+    // std::cout assumed &c (which has type char*)
+    // was a string. So it printed the ‘Q’, and then kept going
 }
 
-void pointer_iterate_array()
+const char* get_pointer_to_array()
 {
-    char name1[]{ "Louise" };
-    int arrayLength{ static_cast<int>(std::size(name1)) };
-    int numVowels{ 0 };
-    for (char *ptr1{ name1 }; ptr1 < (name1 + arrayLength); ++ptr1)
-    {
-        if (isVowel(*ptr1))
-        {
-            ++numVowels;
-        }
-    }
-    std::cout << name1 << " has " << numVowels << " vowels.\n";
-    numVowels =  0;
-    char name2[]{ "Dollie" };
-    auto numVowels{ std::count_if(std::begin(name2), std::end(name2), isVowel) };
-    std::cout << name2 << " has " << numVowels << " vowels.\n";
-
-    /*
-    int arr[]{ 1, 2, 3 };
-    std::cout << 2[arr] << '\n';
-    arr[2]
-    // same as
-    *(arr + 2)
-    // same as
-    *(2 + arr)
-    // same as
-    2[arr]
-
-#include <iostream>
-#include <iterator>
-
-int* find(int* begin, int* end, int value)
-{
-    for (int* p{ begin }; p != end; ++p)
-    {
-        if (*p == value)
-        {
-            return p;
-        }
-    }
-
-    return end;
-}
-
-int main()
-{
-    int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
-
-    int* found{ find(std::begin(arr), std::end(arr), 20) };
-
-    if (found != std::end(arr))
-    {
-        std::cout << *found << '\n';
-    }
-
-    return 0;
-}
-    */
-    int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
-
-    // Note: std::find returns an iterator.
-    auto found{ std::find(std::begin(arr), std::end(arr), 20) };
-
-    if (found != std::end(arr))
-    {
-        std::cout << *found << '\n';
-    }
-
+    int nArray[5]{ 9, 7, 5, 3, 1 };
+    char cArray[]{ "Hello!" };
+    const char* name{ "Alex" };
+    std::cout << "nArray will decay to type int* " << nArray << '\n'; // nArray will decay to type int*
+    std::cout << "cArray will decay to type char* " << cArray << '\n'; // cArray will decay to type char*
+    std::cout << "name is already type char* " << name << '\n'; // name is already type char*
+    return "Melissa";
 }
 
 
 int main()
 {
-    
+    pointer_to_symbolic_constant();
 
 
     return 0;

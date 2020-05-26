@@ -403,6 +403,93 @@ void pointer_arithmetic()
     std::cout << *(array + 1) << '\n'; // prints 7 (note the parenthesis required here)
 }
 
+bool isVowel(char ch)
+{
+    switch (ch)
+    {
+    case 'A':
+    case 'a':
+    case 'E':
+    case 'e':
+    case 'I':
+    case 'i':
+    case 'O':
+    case 'o':
+    case 'U':
+    case 'u':
+        return true;
+    default:
+        return false;
+    }
+}
 
+void pointer_iterate_array()
+{
+    /*
+    int arr[]{ 1, 2, 3 };
+    std::cout << 2[arr] << '\n';
+    arr[2]
+    // same as
+    *(arr + 2)
+    // same as
+    *(2 + arr)
+    // same as
+    2[arr]
+
+#include <iostream>
+#include <iterator>
+
+int* find(int* begin, int* end, int value)
+{
+    for (int* p{ begin }; p != end; ++p)
+    {
+        if (*p == value)
+        {
+            return p;
+        }
+    }
+
+    return end;
+}
+
+int main()
+{
+    int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
+
+    int* found{ find(std::begin(arr), std::end(arr), 20) };
+
+    if (found != std::end(arr))
+    {
+        std::cout << *found << '\n';
+    }
+
+    return 0;
+}
+
+       char name1[]{ "Louise" };
+    int arrayLength{ static_cast<int>(std::size(name1)) };
+    int numVowels{ 0 };
+    for (char* ptr1{ name1 }; ptr1 < (name1 + arrayLength); ++ptr1)
+    {
+        if (isVowel(*ptr1))
+        {
+            ++numVowels;
+        }
+    }
+    std::cout << name1 << " has " << numVowels << " vowels.\n";
+    numVowels = 0;
+    char name2[]{ "Dollie" };
+    auto numVowels{ std::count_if(std::begin(name2), std::end(name2), isVowel) };
+    std::cout << name2 << " has " << numVowels << " vowels.\n";
+        int arr[]{ 2, 5, 4, 10, 8, 20, 16, 40 };
+    // Note: std::find returns an iterator.
+    auto found{ std::find(std::begin(arr), std::end(arr), 20) };
+    if (found != std::end(arr))
+    {
+        std::cout << *found << '\n';
+    }
+    */
+
+}
 
 
