@@ -44,6 +44,7 @@ const char* get_pointer_to_array();
 void dynamic_memory_allocation();
 void dangling_pointer();
 
+void dynamically_allocate_arrays_of_variables();
 
 
 #endif // !CPPLESSON_6
