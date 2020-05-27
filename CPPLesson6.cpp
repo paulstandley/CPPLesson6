@@ -12,12 +12,70 @@
 #include <algorithm>
 
 
+// Note: You need to specify the array size in the function declaration
+void print_elements(int(&arr)[4])
+{
+    // Note that in order for this to work, 
+    // you explicitly need to define the array size in the parameter
+    int length{ static_cast<int>(std::size(arr)) }; 
+    // we can now do this since the array won't decay
+    for (int i{ 0 }; i < length; ++i)
+    {
+        std::cout << arr[i] << '\n';
+    }
+}
 
+void using_references_to_pass_c_style_arrays_to_functions()
+{
+    // One of the most annoying issues with C-style arrays is that in most cases they decay
+    // to pointers when evaluated. 
+    // However, if a C-style array is passed by reference, this decaying does not happen
+    int arr[]{ 99, 20, 14, 80 };
+    print_elements(arr);
+}
 
+// reference for short cuts
+struct Something
+{
+    int value1;
+    float value2;
+};
+
+struct Other
+{
+    Something something;
+    int otherValue;
+};
+
+void ref_as_shotcut()
+{
+    Other other;
+    int& ref{ other.something.value1 };
+    // ref can now be used in place of other.something.value1
+}
+
+void references_vs_pointers() 
+{
+    // If a given task can be solved with either a reference or a pointer, 
+    // the reference should generally be preferred.
+    // Pointers should only be used in situations where references are not sufficient
+    // (such as dynamically allocating memory)
+    int value{ 5 };
+    int *const ptr{ &value };
+    int &ref{ value };
+    *ptr = 5;
+    ref = 5;
+    // References allow us to define aliases to other objects or values. 
+    // References to non-const values can only be initialized with non-const l-values. 
+    // References can not be reassigned once initialized.
+    // References are most often used as function parameters when we either want to modify
+    // the value of the argument, 
+    // or when we want to avoid making an expensive copy of the argument.
+}
 
 int main()
 {
-    print_ref_tester();
+    
 
     return 0;
 }
