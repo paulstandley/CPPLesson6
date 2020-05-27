@@ -580,4 +580,21 @@ void dangling_pointer()
     ptr4 = nullptr;
 }
 
+void dynamically_allocate_arrays_of_variables()
+{
+    std::cout << "Enter a postitive integer: ";
+    int length{};
+    std::cin >> length;
+    // use array new.  Note that length does not need to be constant!
+    int* array{ new int[length] };
+    std::cout << "I just allocated an array of integers of length " << length << '\n';
+    array[0] = 5;
+    int* array1{ new int[5]{ 9, 7, 5, 3, 1 } }; // initialize a dynamic array in C++11
+    delete[] array;
+    array = nullptr;
+    delete[] array1;
+}
+
+
+
 

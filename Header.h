@@ -43,8 +43,12 @@ const char* get_pointer_to_array();
 
 void dynamic_memory_allocation();
 void dangling_pointer();
-
 void dynamically_allocate_arrays_of_variables();
+
+int get_number_for_array();
+std::string get_names_from_user(int num);
+void print_user_names(std::string* name, int num);
+
 
 
 #endif // !CPPLESSON_6
