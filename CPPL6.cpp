@@ -591,7 +591,7 @@ and 6.8a -- Pointer arithmetic and array indexing)
 std::string supports comparing strings via the comparison operators < and >.
 You don’t need to implement string comparison by hand.
 */
-
+/*
 void dynamically_allocate_arrays_of_variables()
 {
     std::cout << "Enter a postitive integer: ";
@@ -675,4 +675,45 @@ void make_dynamic_array()
     names = nullptr;
 }
 
+void pointer_to_const()
+{
+    int value1 = 5;
+    const int* ptr1 = &value1; // ptr points to a const int
+    int value2 = 6;
+    ptr1 = &value2; // okay, ptr now points at some other const int
+    // A const pointer is a pointer whose value can not be changed after initialization
+    int value3 = 5;
+    int* const ptr3 = &value3;
+    // because the value being pointed to is still non-const, it is
+    // possible to change the value being pointed to via dereferencing the const pointer:
+    int value4 = 5;
+    int* const ptr4 = &value4; // ptr4 will always point to value4
+    *ptr4 = 6; // allowed, since ptr4 points to a non-const int
+    // Const pointer to a const value
+    // Finally, it is possible to declare a const pointer to a const value by using the 
+    // const keyword both before the typeand before the variable name :
+    int value5 = 5;
+    const int* const ptr5 = &value5;
+    // A const pointer to a const value can not be set to point to another address, 
+    // nor can the value it is pointing to be changed through the pointer.
+    
+    //1) A non-const pointer can be redirected to point to other addresses.
 
+    //2) A const pointer always points to the same address,
+    //and this address can not be changed.
+
+    //3) A pointer to a non-const value can change the value it is pointing to.
+    //These can not point to a const value.
+
+    //4) A pointer to a const value treats the value as const (even if it is not),
+    //and thus can not change the value it is pointing to.
+    
+    int value5 = 5;
+    const int* ptr5 = &value5;
+    // ptr1 points to a "const int", so this is a pointer to a const value.
+    int* const ptr6 = &value5;
+    // ptr2 points to an "int", so this is a const pointer to a non-const value.
+    const int* const ptr7 = &value5;
+    // ptr3 points to a "const int", so this is a const pointer to a const value.
+}
+*/
