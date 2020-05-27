@@ -12,48 +12,19 @@
 #include <algorithm>
 
 
-void references_to_non_const_values()
+std::string ref_tester(std::string &test_string)
 {
-    int value1{ 5 };// normal integer
-    int &ref1{ value1 };// referance to variable value
-    // In this context, the ampersand does not mean “address of”, it means “reference to”
-    value1 = 6;
-    std::cout << ref1 << '\n';
-    --ref1;
-    std::cout << ref1 << ' ' << value1 << '\n';
-    std::cout << &ref1 << ' ' << &value1 << '\n';// same address
-    // r value
-    int y;      // define y as an integer variable
-    y = 4;      // 4 evaluates to 4, which is then assigned to y
-    y = 2 + 5;  // 2 + 5 evaluates to 7, which is then assigned to y
-
-    int x;      // define x as an integer variable
-    x = y;      // y evaluates to 7 (from before), which is then assigned to x.
-    x = x;      // x evaluates to 7, which is then assigned to x (useless!)
-    x = x + 1;  // x + 1 evaluates to 8, which is then assigned to x.
-    // In this statement, the variable x is being used in two different contexts. 
-    // On the left side of the assignment operator, “x” is being used as an l-value 
-    // (variable with an address). 
-    // On the right side of the assignment operator, x is being used as an r-value, 
-    // and will be evaluated to produce a value (in this case, 7).
-    //Unlike pointers, which can hold a null value, there is no such thing as a null reference.
-    // References to non - const values can only be initialized with non - const l - values.
-    // They can not be initialized with const l - values or r - values.
-    //const int y{ 7 };
-    //int& ref2{ y }; // not okay, y is a const l-value
-    //int& ref3{ 6 }; // not okay, 6 is an r-value
-    int value2{ 5 };
-    int value3{ 6 };
-    int& ref2{ value2 }; // okay, ref is now an alias for value1
-    ref2 = value3; // assigns 6 (the value of value2) to value1 
-    //-- does NOT change the reference it assigns the value of value2 to value3
+    test_string = test_string + " What you looking at!";
+    return test_string;
 }
-
 
 
 int main()
 {
-    references_to_non_const_values();
+    std::string thing{ "Hay me?" };
+    std::cout <<  ref_tester(thing) << '\n';
+    thing = thing + " yes you :-(";
+    std::cout << thing << '\n';
 
     return 0;
 }
