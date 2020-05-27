@@ -58,6 +58,9 @@ void pointer_to_const();
 */
 void references_to_non_const_values();
 
+std::string ref_tester(std::string& test_string);
+void print_ref_tester();
+
 
 
 #endif // !CPPLESSON_6

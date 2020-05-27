@@ -12,19 +12,12 @@
 #include <algorithm>
 
 
-std::string ref_tester(std::string &test_string)
-{
-    test_string = test_string + " What you looking at!";
-    return test_string;
-}
+
 
 
 int main()
 {
-    std::string thing{ "Hay me?" };
-    std::cout <<  ref_tester(thing) << '\n';
-    thing = thing + " yes you :-(";
-    std::cout << thing << '\n';
+    print_ref_tester();
 
     return 0;
 }

@@ -755,6 +755,25 @@ void references_to_non_const_values()
     //-- does NOT change the reference it assigns the value of value2 to value3
 }
 
+std::string ref_tester(std::string &ref)
+{
+    ref = ref + "what you looking at";
+    return ref;
+}
+
+void print_ref_tester()
+{
+    std::string thing{ "Hay " };
+    std::cout << ref_tester(thing) << '\n';
+    thing = thing + " yes you :-(";
+    std::cout << thing << '\n';
+    // When argument n is passed to the function, 
+    // the function parameter ref is set as a reference to argument thing. 
+    // This allows the function to change the value of thing through ref! 
+    // Note that thing does not need to be a reference itself.
+    // The primary downside of using non-const references 
+    // as function parameters is that the argument must be a non-const l-value
+}
 
 
 
