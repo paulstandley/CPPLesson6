@@ -579,6 +579,18 @@ void dangling_pointer()
     delete ptr4;
     ptr4 = nullptr;
 }
+/*
+Write a program that:
+* Asks the user how many names they wish to enter.
+* Dynamically allocates a std::string array.
+* Asks the user to enter each name.
+* Calls std::sort to sort the names
+(See 6.4 -- Sorting an array using selection sort
+and 6.8a -- Pointer arithmetic and array indexing)
+* Prints the sorted list of names.
+std::string supports comparing strings via the comparison operators < and >.
+You don’t need to implement string comparison by hand.
+*/
 
 void dynamically_allocate_arrays_of_variables()
 {
@@ -595,6 +607,72 @@ void dynamically_allocate_arrays_of_variables()
     delete[] array1;
 }
 
+int get_number_for_array()
+{
+    while (true)
+    {
+        int num{};
+        std::cout << "How many names would you like to enter? ";
+        std::cin >> num;
+        if (std::cin.fail()) // has a previous extraction failed?
+        {
+            // yep, so let's handle the failure
+            std::cin.clear(); // put us back in 'normal' operation mode
+            std::cin.ignore(32767, '\n'); // and remove the bad input
+            break;
+        }
+        else // else our extraction succeeded
+        {
+            std::cin.ignore(32767, '\n'); // clear (up to 32767) characters out of the buffer until a '\n' character is removed
+            return num; // so return the value we extracted
+        }
+    }
+}
 
+std::string get_names_from_user(int num)
+{
+    while (true)
+    {
+        std::cout << "Enter name # " << num + 1 << " ";
+        std::string name{};
+        std::getline(std::cin, name);
+        if (std::cin.fail()) // has a previous extraction failed?
+        {
+            // yep, so let's handle the failure
+            std::cin.clear(); // put us back in 'normal' operation mode
+            std::cin.ignore(32767, '\n'); // and remove the bad input
+            break;
+        }
+        else // else our extraction succeeded
+        {
+            std::cin.ignore(32767, '\n'); // clear (up to 32767) characters out of the buffer until a '\n' character is removed
+            return name; // so return the value we extracted
+        }
+    }
+}
+
+void print_user_names(std::string* name, int num)
+{
+    std::cout << "Here is your sorted list\n\n";
+    for (int index = 0; index < num; index++)
+    {
+        std::cout << "Name #" << index + 1 << ": " << name[index] << '\n';
+    }
+}
+
+void make_dynamic_array()
+{
+    int length{ get_number_for_array() };
+    // Allocate an array to hold the names
+    auto* names{ new std::string[static_cast<std::size_t>(length)]{} };
+    for (int index = 0; index < length; ++index)
+    {
+        names[index] = get_names_from_user(index);
+    }
+    std::sort(names, names + length);
+    print_user_names(names, length);
+    delete[] names;
+    names = nullptr;
+}
 
 

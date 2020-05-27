@@ -12,86 +12,49 @@
 #include <algorithm>
 
 
-/*
-Write a program that:
-* Asks the user how many names they wish to enter.
-* Dynamically allocates a std::string array.
-* Asks the user to enter each name.
-* Calls std::sort to sort the names 
-(See 6.4 -- Sorting an array using selection sort 
-and 6.8a -- Pointer arithmetic and array indexing)
-* Prints the sorted list of names.
-std::string supports comparing strings via the comparison operators < and >.
-You don’t need to implement string comparison by hand.
-*/
-
-int get_number_for_array()
+void pointer_to_const()
 {
-    while (true)
-    {
-        int num{};
-        std::cout << "How many names would you like to enter? ";
-        std::cin >> num;
-        if (std::cin.fail()) // has a previous extraction failed?
-        {
-            // yep, so let's handle the failure
-            std::cin.clear(); // put us back in 'normal' operation mode
-            std::cin.ignore(32767, '\n'); // and remove the bad input
-            break;
-        }
-        else // else our extraction succeeded
-        {
-            std::cin.ignore(32767, '\n'); // clear (up to 32767) characters out of the buffer until a '\n' character is removed
-            return num; // so return the value we extracted
-        }
-    }
+    int value1 = 5;
+    const int* ptr1 = &value1; // ptr points to a const int
+    int value2 = 6;
+    ptr1 = &value2; // okay, ptr now points at some other const int
+    // A const pointer is a pointer whose value can not be changed after initialization
+    int value3 = 5;
+    int *const ptr3 = &value3;
+    // because the value being pointed to is still non-const, it is
+    // possible to change the value being pointed to via dereferencing the const pointer:
+    int value4 = 5;
+    int *const ptr4 = &value4; // ptr4 will always point to value4
+    *ptr4 = 6; // allowed, since ptr4 points to a non-const int
+    // Const pointer to a const value
+    // Finally, it is possible to declare a const pointer to a const value by using the 
+    // const keyword both before the typeand before the variable name :
+    int value5 = 5;
+    const int *const ptr5 = &value5;
+    // A const pointer to a const value can not be set to point to another address, 
+    // nor can the value it is pointing to be changed through the pointer.
+    /*
+    1) A non-const pointer can be redirected to point to other addresses.
+
+    2) A const pointer always points to the same address, 
+    and this address can not be changed.
+
+    3) A pointer to a non-const value can change the value it is pointing to. 
+    These can not point to a const value.
+
+    4) A pointer to a const value treats the value as const (even if it is not), 
+    and thus can not change the value it is pointing to.
+    */
+    int value5 = 5;
+    const int *ptr5 = &value5; 
+    // ptr1 points to a "const int", so this is a pointer to a const value.
+    int *const ptr6 = &value5; 
+    // ptr2 points to an "int", so this is a const pointer to a non-const value.
+    const int *const ptr7 = &value5; 
+    // ptr3 points to a "const int", so this is a const pointer to a const value.
 }
 
-std::string get_names_from_user(int num)
-{
-    while (true)
-    {
-        std::cout << "Enter name # " << num + 1 << " " ;
-        std::string name{};
-        std::getline(std::cin, name);
-        if (std::cin.fail()) // has a previous extraction failed?
-        {
-            // yep, so let's handle the failure
-            std::cin.clear(); // put us back in 'normal' operation mode
-            std::cin.ignore(32767, '\n'); // and remove the bad input
-            break;
-        }
-        else // else our extraction succeeded
-        {
-            std::cin.ignore(32767, '\n'); // clear (up to 32767) characters out of the buffer until a '\n' character is removed
-            return name; // so return the value we extracted
-        }
-    }
-}
 
-void print_user_names(std::string *name, int num)
-{
-    std::cout << "Here is your sorted list\n\n";
-    for (int index = 0; index < num; index++)
-    {
-        std::cout << "Name #" << index + 1 << ": " << name[index] << '\n';
-    }
-}
-
-void make_dynamic_array()
-{
-    int length{ get_number_for_array() };
-    // Allocate an array to hold the names
-    auto *names{ new std::string[static_cast<std::size_t>(length)]{} };
-    for (int index = 0; index < length; ++index)
-    {
-        names[index] = get_names_from_user(index);
-    }
-    std::sort(names, names + length);
-    print_user_names(names, length);
-    delete[] names;
-    names = nullptr;
-}
 
 
 int main()

@@ -49,6 +49,11 @@ int get_number_for_array();
 std::string get_names_from_user(int num);
 void print_user_names(std::string* name, int num);
 
+int get_number_for_array();
+std::string get_names_from_user(int num);
+void print_user_names(std::string* name, int num);
+void make_dynamic_array();
+
 
 
 #endif // !CPPLESSON_6
