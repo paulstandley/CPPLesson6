@@ -61,6 +61,14 @@ void references_to_non_const_values();
 std::string ref_tester(std::string& test_string);
 void print_ref_tester();
 
+void print_elements(int(&arr)[4]);
+void using_references_to_pass_c_style_arrays_to_functions();
+
+void const_ref();
+void const_function(const int& ref);
+void print_it(const int& x);
+void print_const_function();
+
 
 
 #endif // !CPPLESSON_6
