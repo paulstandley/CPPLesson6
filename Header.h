@@ -72,6 +72,7 @@ void member_selection_with_pointersand_references();
 
 void for_each_loops();
 void for_each_loops_and_the_auto_keyword();
+void for_each_loops_and_non_arrays();
 
 
 

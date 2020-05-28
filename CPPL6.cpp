@@ -7,6 +7,7 @@
 #include <cstddef> // for NULL
 #include <iterator> // for std::size std::begin and std::end
 #include <algorithm>
+#include <vector>
 
 
 

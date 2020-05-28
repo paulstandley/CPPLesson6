@@ -7,6 +7,8 @@
 #include <cstddef> // for NULL std::nullptr_t
 #include <iterator> // for std::size std::begin and std::end
 #include <algorithm>
+#include <vector>
+
 
 void const_ref()
 {
@@ -103,5 +105,12 @@ void for_each_loops()
 	// It’s assigned the value of the array element for the current loop iteration
 }
 
+void for_each_loops_and_the_auto_keyword()
+{
+	constexpr int fibonacci[]{ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
+	for (auto number : fibonacci) // type is auto, so number has its type deduced from the fibonacci array
+		std::cout << number << ' ';
+	std::cout << '\n';
+}
 
 
