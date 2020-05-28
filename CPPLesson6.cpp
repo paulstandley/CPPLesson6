@@ -11,14 +11,44 @@
 #include <iterator> // for std::size std::begin and std::end
 #include <algorithm>
 
-
+void member_selection_with_pointersand_references()
+{
+	struct Person
+	{
+		int age;
+		double weight;
+	};
+	Person person;
+	// Member selection using actual struct variable
+	person.age = 5;
+	person.weight = 10;
+	std::cout << person.age << '\t' << person.weight << '\n';
+	Person person1;
+	// Member selection using pointer to struct
+	Person *ptr1 = &person1;
+	(*ptr1).age = 4;
+	(*ptr1).weight = 9;
+	std::cout << person1.age << '\t' << person1.weight << '\n';
+	// Note that the pointer dereference must be enclosed in parentheses, 
+	// because the member selection operator has a higher precedence than the dereference operator
+	// Because the syntax for access to structs and class members through a pointer is awkward,
+	// C++ offers a second member selection operator (->) for doing member selection from pointers. 
+	// The following two lines are equivalent
+	(*ptr1).age = 725;
+	ptr1->age = 12.2;
+	// This is not only easier to type, but is also much less prone to error because the dereference 
+	// is implicitly done for you, so there are no precedence issues to worry about. 
+	// Consequently, when doing member access through a pointer,
+	// always use the -> operator instead of the . operator.
+	// Rule: When using a pointer to access the value of a member, 
+	// use operator-> instead of operator. (the . operator)
+	std::cout << person1.age << '\t' << person1.weight << '\n';
+}
 
 
 int main()
 {
-    const_ref();
-    const_function(8);
-    print_const_function();
+	member_selection_with_pointersand_references();
 
     return 0;
 }

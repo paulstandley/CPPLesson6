@@ -68,6 +68,7 @@ void const_ref();
 void const_function(const int& ref);
 void print_it(const int& x);
 void print_const_function();
+void member_selection_with_pointersand_references();
 
 
 
