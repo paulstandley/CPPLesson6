@@ -12,27 +12,18 @@
 #include <algorithm>
 
 
-void for_each_loops()
+void for_each_loops_and_the_auto_keyword()
 {
-	// When this statement is encountered, the loop will iterate through each element in array,
-	// assigning the value of the current array element to the variable declared in element_declaration.
-	// For best results, element_declaration should have the same type as the array elements, 
-	// otherwise type conversion will occur
-	constexpr int fribonacci[]{ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
-	for (int number : fribonacci)// iterate over array fibonacci
-	{
-		std::cout << number << ' ';
-		// we access the array element for this iteration through variable number
-	}
-	std::cout << '\n';
-	// Note that variable number is not an array index. 
-	// It’s assigned the value of the array element for the current loop iteration
+    constexpr int fibonacci[]{ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
+    for (auto number : fibonacci) // type is auto, so number has its type deduced from the fibonacci array
+        std::cout << number << ' ';
+    std::cout << '\n';
 }
 
 
 int main()
 {
-	
+	for_each_loops();
 
     return 0;
 }

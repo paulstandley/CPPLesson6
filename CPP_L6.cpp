@@ -86,5 +86,22 @@ void member_selection_with_pointersand_references()
 	std::cout << person1.age << '\t' << person1.weight << '\n';
 }
 
+void for_each_loops()
+{
+	// When this statement is encountered, the loop will iterate through each element in array,
+	// assigning the value of the current array element to the variable declared in element_declaration.
+	// For best results, element_declaration should have the same type as the array elements, 
+	// otherwise type conversion will occur
+	constexpr int fribonacci[]{ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89 };
+	for (int number : fribonacci)// iterate over array fibonacci
+	{
+		std::cout << number << ' ';
+		// we access the array element for this iteration through variable number
+	}
+	std::cout << '\n';
+	// Note that variable number is not an array index. 
+	// It’s assigned the value of the array element for the current loop iteration
+}
+
 
 

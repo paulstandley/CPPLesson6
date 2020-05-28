@@ -70,6 +70,10 @@ void print_it(const int& x);
 void print_const_function();
 void member_selection_with_pointersand_references();
 
+void for_each_loops();
+void for_each_loops_and_the_auto_keyword();
+
+
 
 
 #endif // !CPPLESSON_6
