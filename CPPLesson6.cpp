@@ -13,64 +13,12 @@
 #include <vector>
 
 
-/*
-Declare a fixed array with the following names: Alex, Betty, Caroline, Dave, Emily, 
-Fred, Greg, and Holly. Ask the user to enter a name. Use a for each loop to see if the name 
-the user entered is in the array.
-*/
 
-std::string quiz_get_name_string()
-{
-	while (true)
-	{
-		std::string name{};
-		std::cout << "Enter a name: ";
-		std::getline(std::cin, name);// get full string from cin
-		if (std::cin.fail())
-		{
-			std::cin.clear();// reset cin
-			std::cin.ignore(32767, '\n');// remove input
-		}
-		else
-		{
-			std::cin.ignore(32767, '\n');// remove input
-			return name;
-		}
-	}
-}
-
-void quiz_array_for_each()
-{
-	const std::string string_array[]{ "Alex", "Betty", "Caroline", "Dave", "Emily", "Fred", "Greg", "Holly" };
-	bool in_array{ false };
-	std::string name{ quiz_get_name_string() };
-	std::cout << name << '\n';
-	for (std::string elements : string_array)
-	{
-		if (elements == name)
-		{
-			std::cout << name << " was found." << '\n';
-			in_array = true;
-			break;
-		}
-	}
-	if (in_array)
-	{
-		std::cout << name << " was found." << '\n';
-	}
-	else
-	{
-		std::cout << name << " was ont found." << '\n';
-	}
-}
 
 
 int main()
 {
-	quiz_array_for_each();
-	
-	
-
+    
 
     return 0;
 }

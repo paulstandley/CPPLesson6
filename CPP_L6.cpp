@@ -183,5 +183,121 @@ void for_each_loops_and_non_arrays()
 	// be a reference.
 }
 
+/*
+Declare a fixed array with the following names: Alex, Betty, Caroline, Dave, Emily,
+Fred, Greg, and Holly. Ask the user to enter a name. Use a for each loop to see if the name
+the user entered is in the array.
+*/
+
+std::string quiz_get_name_string()
+{
+	while (true)
+	{
+		std::string name{};
+		std::cout << "Enter a name: ";
+		std::getline(std::cin, name);// get full string from cin
+		if (std::cin.fail())
+		{
+			std::cin.clear();// reset cin
+			std::cin.ignore(32767, '\n');// remove input
+		}
+		else
+		{
+			std::cin.ignore(32767, '\n');// remove input
+			return name;
+		}
+	}
+}
+
+void quiz_array_for_each()
+{
+	const std::string string_array[]{ "Alex", "Betty", "Caroline", "Dave", "Emily", "Fred", "Greg", "Holly" };
+	bool in_array{ false };
+	std::string name{ quiz_get_name_string() };
+	std::cout << name << '\n';
+	for (std::string elements : string_array)
+	{
+		if (elements == name)
+		{
+			std::cout << name << " was found." << '\n';
+			in_array = true;
+			break;
+		}
+	}
+	if (in_array)
+	{
+		std::cout << name << " was found." << '\n';
+	}
+	else
+	{
+		std::cout << name << " was ont found." << '\n';
+	}
+}
+/*
+
+void void_pointer()
+{
+	void* void_ptr;
+	// A void pointer can point to objects of any data type
+	int n_val;
+	float f_val;
+	struct Something
+	{
+		int n;
+		float f;
+	};
+	Something s_val;
+	void_ptr = &n_val;
+	void_ptr = &f_val;
+	void_ptr = &s_val;
+	int value1{ 5 };
+	void* void_ptr1{ &value1 };
+	// std::cout << *voidPtr << '\n'; // illegal: cannot dereference a void pointer
+	int* intPtr1{ static_cast<int*>(void_ptr1) }; // however, if we cast our void pointer to an int pointer...
+	std::cout << *intPtr1 << '\n'; // then we can dereference it like normal
+	void* ptr2{ nullptr }; // ptr is a void pointer that is currently a null pointer
+	// A void pointer is a pointer that can point to any type of object, but does not know
+	// what type of object it points to.
+	// A void pointer must be explicitly cast into another type of pointer to be dereferenced.
+	// A null pointer is a pointer that does not point to an address.
+	// A void pointer can be a null pointer.
+}
+
+enum class Type
+{
+	INT,
+	FLOAT,
+	CSTRING,
+};
+
+void print_void_pointer_value(void* ptr, Type type)
+{
+	switch (type)
+	{
+	case Type::INT:
+		std::cout << *static_cast<int*>(ptr) << '\n'; // cast to int pointer and dereference
+		break;
+	case Type::FLOAT:
+		std::cout << *static_cast<float*>(ptr) << '\n'; // cast to float pointer and dereference
+		break;
+	case Type::CSTRING:
+		std::cout << static_cast<char*>(ptr) << '\n'; // cast to char pointer (no dereference)
+		// std::cout knows to treat char* as a C-style string
+		// if we were to dereference the result, then we'd just print the single char that ptr is pointing to
+		break;
+	}
+}
+
+void void_pointer_value()
+{
+	int n_value{ 5 };
+	float f_value{ 7.5f };
+	char sz_value[]{ "Mollie" };
+	print_void_pointer_value(&n_value, Type::INT);
+	print_void_pointer_value(&f_value, Type::FLOAT);
+	print_void_pointer_value(sz_value, Type::CSTRING);
+}
+
+*/
 
 

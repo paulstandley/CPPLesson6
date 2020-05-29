@@ -73,6 +73,12 @@ void member_selection_with_pointersand_references();
 void for_each_loops();
 void for_each_loops_and_the_auto_keyword();
 void for_each_loops_and_non_arrays();
+std::string quiz_get_name_string();
+void quiz_array_for_each();
+
+//void void_pointer();
+//void print_void_pointer_value(void* ptr, enum class type);
+//void void_pointer_value();
 
 
 
