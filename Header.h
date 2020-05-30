@@ -80,6 +80,7 @@ void quiz_array_for_each();
 //void print_void_pointer_value(void* ptr, enum class type);
 //void void_pointer_value();
 
+void pointer_to_pointer_c();
 
 
 
