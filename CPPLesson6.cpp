@@ -13,29 +13,24 @@
 #include <vector>
 
 
-void pointer_to_pointer_c()
+/*Pointers to pointers and dynamic multidimensional arrays*/
+void pointers()
 {
-    // C
-    int var = 789;
-    // pointer for var 
-    int *ptr2;
-    // double pointer for ptr2 
-    int **ptr1;
-    // storing address of var in ptr2 
-    ptr2 = &var;
-    // Storing address of ptr2 in ptr1 
-    ptr1 = &ptr2;
-    // Displaying value of var using 
-    // both single and double pointers 
-    printf("Value of var = %d\n", var);
-    printf("Value of var using single pointer = %d\n", *ptr2);
-    printf("Value of var using double pointer = %d\n", **ptr1);
+    int value{ 5 };
+    int *ptr = &value;
+    std::cout << *ptr << '\n';
+    int **ptrptr = &ptr;
+    std::cout << **ptrptr;
 }
 
+void array_of_poniters()
+{
+    int **array = new int *[10];
+}
 
 int main()
 {
-    pointer_to_pointer_c();
+    pointers();
 
     return 0;
 }
