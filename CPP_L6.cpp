@@ -320,6 +320,13 @@ void pointer_to_pointer_c()
 	std::cout << ptr1 << " ptr1 " << **ptr1 << " **ptr1 " << ptr2 << " ptr2 " << *ptr2 << " *ptr2\n";
 }
 
-
+void pointers()
+{
+	int value{ 5 };
+	int* ptr = &value;
+	std::cout << *ptr << '\n';
+	int** ptrptr = &ptr;
+	std::cout << **ptrptr;
+}
 
 

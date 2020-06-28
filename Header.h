@@ -81,6 +81,7 @@ void quiz_array_for_each();
 //void void_pointer_value();
 
 void pointer_to_pointer_c();
+void pointers();
 
 
 
