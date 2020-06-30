@@ -9,46 +9,27 @@
 #include <cstring> // For std::strlen
 #include <cstddef> // for NULL std::nullptr_t
 #include <iterator> // for std::size std::begin and std::end
-#include <algorithm>
+#include <algorithm>// for std::sort
 #include <vector>
 #include <array>
 
-void std_array()
+void display_std_array()
 {
-    //Introduced in C++11, std::array provides fixed array functionality that won’t decay 
-    //when passed into a function. std::array is defined in the <array> header, 
-    //inside the std namespace
-    // declare an integer array with length 3
-    std::array<int, 3> my_array1;
-    std::array<int, 5> myArray2 = { 9, 7, 5, 3, 1 }; // initializer list
-    std::array<int, 5> myArray3{ 9, 7, 5, 3, 1 }; // uniform initialization
-    //Just like the native implementation of fixed arrays, 
-    //the length of a std::array must be known at compile time.
-    //std::array<int, > myArray{ 9, 7, 5, 3, 1 }; // illegal, array length must be provided
-    //std::array<int> myArray{ 9, 7, 5, 3, 1 }; // illegal, array length must be provided
-    //However, since C++17, it is allowed to omit the type and size. 
-    //They can only be omitted together, but not one or the other, 
-    //and only if the array is explicitly initialized.
-    std::array myArray4{ 9, 7, 5, 3, 1 }; // The type is deduced to std::array<int, 5>
-    std::array myArray5{ 9.7, 7.31 }; // The type is deduced to std::array<double, 2>
-    std::array<int, 5> myArray6;
-    myArray6 = { 0, 1, 2, 3, 4 }; // okay
-    myArray6 = { 9, 8, 7 }; // okay, elements 3 and 4 are set to zero!
-    //myArray6 = { 0, 1, 2, 3, 4, 5 }; // not allowed, too many elements in initializer list!
-    std::cout << myArray6[1] << '\n';
-    myArray6[2] = 6;
-    //Just like built-in fixed arrays, the subscript operator does not do any bounds-checking.
-    //If an invalid index is provided, bad things will probably happen.
-    //std::array supports a second form of array element access 
-    //(the at() function) that does bounds checking:
-    std::array myArray7{ 9, 7, 5, 3, 1 };
-    myArray7.at(1) = 6; // array element 1 is valid, sets array element 1 to value 6
-    myArray7.at(9) = 10; // array element 9 is invalid, will throw an error
+	std::array myArray{ 9.0, 7.2, 5.4, 3.6, 1.8 };
+	std::cout << "length: " << myArray.size() << '\n';
+	//Always pass std::array by reference or const reference
+	std::sort(myArray.begin(), myArray.end()); // sort the array forwards
+	//std::sort(myArray.rbegin(), myArray.rend()); // sort the array backwards
+	for (int element : myArray)
+		std::cout << element << ' ';
+	std::cout << '\n';
+	size_and_sorting(myArray);
 }
+
 
 int main()
 {
-    std_array();
+	display_std_array();
 
     return 0;
 }

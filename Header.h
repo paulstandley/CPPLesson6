@@ -85,6 +85,7 @@ void pointers();
 void array_of_poniters();
 
 void std_array();
+void size_and_sorting(const std::array<double, 5>& myArray);
 
 
 #endif // !CPPLESSON_6
