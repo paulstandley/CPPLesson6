@@ -82,7 +82,9 @@ void quiz_array_for_each();
 
 void pointer_to_pointer_c();
 void pointers();
+void array_of_poniters();
 
+void std_array();
 
 
 #endif // !CPPLESSON_6

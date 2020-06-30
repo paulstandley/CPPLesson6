@@ -11,56 +11,44 @@
 #include <iterator> // for std::size std::begin and std::end
 #include <algorithm>
 #include <vector>
+#include <array>
 
-
-/*Pointers to pointers and dynamic multidimensional arrays*/
-
-
-void array_of_poniters()
+void std_array()
 {
-    // allocate an array of 10 int pointers
-    int **array = new int *[10];
-    //int **array = new int[10][5]; // won’t work!
-    //There are two possible solutions here. If the rightmost array dimension is a compile-time 
-    // constant, you can do this:
-    int(*array1)[5] = new int[10][5];
-    //The parenthesis are required here to ensure proper precedence.In C++11 or newer, 
-    //this is a good place to use automatic type deduction :
-    auto array2 = new int[10][5]; // so much simpler!
-    //Unfortunately, this relatively simple solution doesn’t work if any non-leftmost array dimension
-    //isn’t a compile-time constant. In that case, we have to get a little more complicated.
-    //First, we allocate an array of pointers (as per above). Then we iterate through the array of
-    //pointers and allocate a dynamic array for each array element. 
-    //Our dynamic two-dimensional array is a dynamic one-dimensional array of dynamic one-dimensional
-    //arrays!
-    int **array3 = new int *[10]; // allocate an array of 10 int pointers — these are our rows
-    for (int count = 0; count < 10; ++count)
-        array3[count] = new int[5]; // these are our columns
-    array3[9][4] = 3; // This is the same as (array3[9])[4] = 3;
-        int **array4 = new int *[10]; // allocate an array of 10 int pointers — these are our rows
-    for (int count = 0; count < 10; ++count)
-        array[count] = new int[count + 1]; // these are our columns
-    //Note that we delete the array in the opposite order that we created it 
-    //(elements first, then the array itself). 
-    //If we delete array before the array elements, 
-    //then we’d have to access deallocated memory to delete the array elements. 
-    //And that would result in undefined behavior.
-    for (int count = 0; count < 10; ++count)
-        delete[] array4[count];
-    delete[] array4; // this needs to be done last
-    // Instead of this:
-    int **array5 = new int *[10]; // allocate an array of 10 int pointers — these are our rows
-    for (int count = 0; count < 10; ++count)
-        array5[count] = new int[5]; // these are our columns
-    // Do this 
-    int *array6 = new int[50]; // a 10x5 array flattened into a single array
-    // set array[9,4] to 3 using our flattened array
-    
+    //Introduced in C++11, std::array provides fixed array functionality that won’t decay 
+    //when passed into a function. std::array is defined in the <array> header, 
+    //inside the std namespace
+    // declare an integer array with length 3
+    std::array<int, 3> my_array1;
+    std::array<int, 5> myArray2 = { 9, 7, 5, 3, 1 }; // initializer list
+    std::array<int, 5> myArray3{ 9, 7, 5, 3, 1 }; // uniform initialization
+    //Just like the native implementation of fixed arrays, 
+    //the length of a std::array must be known at compile time.
+    //std::array<int, > myArray{ 9, 7, 5, 3, 1 }; // illegal, array length must be provided
+    //std::array<int> myArray{ 9, 7, 5, 3, 1 }; // illegal, array length must be provided
+    //However, since C++17, it is allowed to omit the type and size. 
+    //They can only be omitted together, but not one or the other, 
+    //and only if the array is explicitly initialized.
+    std::array myArray4{ 9, 7, 5, 3, 1 }; // The type is deduced to std::array<int, 5>
+    std::array myArray5{ 9.7, 7.31 }; // The type is deduced to std::array<double, 2>
+    std::array<int, 5> myArray6;
+    myArray6 = { 0, 1, 2, 3, 4 }; // okay
+    myArray6 = { 9, 8, 7 }; // okay, elements 3 and 4 are set to zero!
+    //myArray6 = { 0, 1, 2, 3, 4, 5 }; // not allowed, too many elements in initializer list!
+    std::cout << myArray6[1] << '\n';
+    myArray6[2] = 6;
+    //Just like built-in fixed arrays, the subscript operator does not do any bounds-checking.
+    //If an invalid index is provided, bad things will probably happen.
+    //std::array supports a second form of array element access 
+    //(the at() function) that does bounds checking:
+    std::array myArray7{ 9, 7, 5, 3, 1 };
+    myArray7.at(1) = 6; // array element 1 is valid, sets array element 1 to value 6
+    myArray7.at(9) = 10; // array element 9 is invalid, will throw an error
 }
 
 int main()
 {
-    pointers();
+    std_array();
 
     return 0;
 }
