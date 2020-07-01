@@ -86,6 +86,7 @@ void array_of_poniters();
 
 void std_array();
 void size_and_sorting(const std::array<double, 5>& myArray);
+void display_std_array();
 
 
 #endif // !CPPLESSON_6

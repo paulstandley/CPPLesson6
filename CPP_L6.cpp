@@ -414,4 +414,17 @@ void size_and_sorting(const std::array<double, 5> &myArray)
 	//when the std::array was passed to the function (for performance reasons).
 }
 
+void display_std_array()
+{
+	std::array myArray{ 9.0, 7.2, 5.4, 3.6, 1.8 };
+	std::cout << "length: " << myArray.size() << '\n';
+	//Always pass std::array by reference or const reference
+	std::sort(myArray.begin(), myArray.end()); // sort the array forwards
+	//std::sort(myArray.rbegin(), myArray.rend()); // sort the array backwards
+	for (int element : myArray)
+		std::cout << element << ' ';
+	std::cout << '\n';
+	size_and_sorting(myArray);
+}
+
 
