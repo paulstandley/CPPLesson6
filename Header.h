@@ -89,6 +89,26 @@ void size_and_sorting(const std::array<double, 5>& myArray);
 void display_std_array();
 void std_array_wrong();
 
+struct House
+{
+	int number{};
+	int stories{};
+	int roomsPerStory{};
+};
+
+struct ArrayStruct
+{
+	int value[3]{};
+};
+
+struct ArrayHouse
+{
+	// This is now an array of House
+	House value[3]{};
+};
+
+void array_of_struct();
+
 
 #endif // !CPPLESSON_6
 
