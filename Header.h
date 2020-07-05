@@ -110,6 +110,7 @@ struct ArrayHouse
 void array_of_struct();
 
 void vector_array();
+void iterators();
 
 
 #endif // !CPPLESSON_6
