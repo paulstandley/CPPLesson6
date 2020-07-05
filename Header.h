@@ -109,6 +109,8 @@ struct ArrayHouse
 
 void array_of_struct();
 
+void vector_array();
+
 
 #endif // !CPPLESSON_6
 
