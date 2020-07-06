@@ -12,84 +12,59 @@
 #include <algorithm>// for std::sort
 #include <vector>
 #include <array>
+#include <functional> // std::function
+#include <utility>
 
-// Our function will return true if the element matches
-bool containsNut(std::string_view str)
+
+bool greater(int a, int b)
 {
-    // std::string_view::find returns std::string_view::npos if it doesn't find
-    // the substring. Otherwise it returns the index where the substring occurs
-    // in str.
-    return (str.find("nut") != std::string_view::npos);
+    // Order @a before @b if @a is greater than @b.
+    return (a > b);
 }
 
-void std_algos()
+void std_algos_count()
 {
-    //The functionality provided in the algorithms library generally fall into one of three categories:
-
-    //Inspectors -- Used to view(but not modify) data in a container
-    //.Examples include searchingand counting.
-
-    //Mutators -- Used to modify data in a container.
-    //Examples include sortingand shuffling.
-
-    //Facilitators -- Used to generate a result based on values of the data members.
-    //Examples include objects that multiply values, 
-    //or objects that determine what order pairs of elements should be sorted in.
-
+    std::array<std::string_view, 5> arr{ "apple", "banana", "walnut", "lemon", "peanut" };
+    auto nuts{ std::count_if(arr.begin(), arr.end(), containsNut) };
+    std::cout << "Counted " << nuts << " nut(s)\n";
+ 
+    //There’s a version of std::sort that takes a function as its 
+    //third parameter that allows us to sort however we like. 
+    //The function takes two parameters to compare, 
+    //and returns true if the first argument should be ordered before the second.
+     //By default, std::sort sorts the elements in ascending order.
     std::array arr1{ 13, 90, 99, 5, 40, 80 };
-
-    std::cout << "Enter a value to search for and replace with: ";
-    int search{};
-    int replace{};
-    std::cin >> search >> replace;
-
-    // Input validation omitted
-
-    // std::find returns an iterator pointing to the found element (or the end of the container)
-    // we'll store it in a variable, using type inference to deduce the type of
-    // the iterator (since we don't care)
-    auto found1{ std::find(arr1.begin(), arr1.end(), search) };
-
-    // Algorithms that don't find what they were looking for return the end iterator.
-    // We can access it by using the end() member function.
-    if (found1 == arr1.end())
-    {
-        std::cout << "Could not find " << search << '\n';
-    }
-    else
-    {
-        // Override the found element.
-        *found1 = replace;
-    }
+    // Pass greater to std::sort
+    std::sort(arr1.begin(), arr1.end(), greater);
     for (int i : arr1)
     {
         std::cout << i << ' ';
     }
     std::cout << '\n';
+    //Our greater function needs 2 arguments, but we’re not passing it any, 
+    //so where do they come from? When we use a function without parentheses (), 
+    //it’s only a function pointer, not a call.
+    //std::sort uses this pointer and calls the actual greater function
+    //with any 2 elements of the array. 
+    //We don’t know which elements greater will be called with, 
+    //because it’s not defined which sorting algorithm std::sort is using under the hood.
 
-    std::array<std::string_view, 4> arr{ "apple", "banana", "walnut", "lemon" };
-    // Scan our array to see if any elements contain the "nut" substring
-    auto found{ std::find_if(arr.begin(), arr.end(), containsNut) };
-
-    if (found == arr.end())
-    {
-        std::cout << "No nuts\n";
-    }
-    else
-    {
-        std::cout << "Found " << *found << '\n';
-    }
-    //If you were to write the above example by hand, 
-    //you’d need at least two loops (one to loop through the array,
-    //and one to match the substring). 
-    //The standard library functions 
-    //allow us to do the same thing in just a few lines of code!
+    std::sort(arr.begin(), arr.end(), std::greater{});
+    // use the standard library greater comparison
+    // Before C++17, we had to specify the element type when we create std::greater
+    std::sort(arr.begin(), arr.end(), std::greater<int>{}); 
+    // use the standard library greater comparison
+    //Note that the std::greater{} needs the curly braces because it is not a callable 
+    //function. It’s a type, and in order to use it, 
+    //we need to instantiate an object of that type.
+    //The curly braces instantiate an anonymous object of that type
+    //(which then gets passed as an argument to std::sort)
 }
 
 
 int main()
 {
-    std_algos();
+    std_algos_count();
 
     return 0;
 }

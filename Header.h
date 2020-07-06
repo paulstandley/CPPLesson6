@@ -112,6 +112,9 @@ void array_of_struct();
 void vector_array();
 void iterators();
 
+bool containsNut(std::string_view str);
+void std_algos();
+
 
 #endif // !CPPLESSON_6
 
